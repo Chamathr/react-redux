@@ -14,9 +14,16 @@ export const setData = (payload) => {
   };
 };
 
-export const getDataError = (payload) => {
+export const setDataError = (payload) => {
   return {
     type: getDataActions.SET_DATA_ERROR,
+    payload,
+  };
+};
+
+export const setDataLoading = (payload) => {
+  return {
+    type: getDataActions.SET_DATA_LOADING,
     payload,
   };
 };

@@ -5,25 +5,29 @@ import {
 } from "../types/dataType";
 import {
   setData,
-  getDataError
+  setDataError,
+  setDataLoading
 } from "../actions/dataAction";
 import {
   getDataApi,
 } from "../services/dataService";
 
-export function* getDataList() {
+export function* getData() {
   yield takeEvery(getDataActions.GET_DATA, function* () {
     try {
+      yield put(setDataLoading('loading'));
       const data = yield call(getDataApi);
+      yield put(setDataLoading('idle'));
       yield put(setData(data.data));
     } catch (error) {
-      yield put(getDataError(error.message));
+      yield put(setDataLoading('idle'));
+      yield put(setDataError(error.message));
     }
   });
 }
 
 export default function* rootSaga() {
   yield all([
-    fork(getDataList)
+    fork(getData)
   ]);
 }
