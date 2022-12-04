@@ -1,32 +1,18 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "./reducers/rootReducer";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas/index";
+import rootSaga from "./sagas/rootSaga";
 
-const sagaMiddleware = createSagaMiddleware();
+const saga = createSagaMiddleware();
+const composeEnhancers =
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
+const enhancer = composeEnhancers(applyMiddleware(saga));
 
-const middlewares = [sagaMiddleware];
+const store = createStore(reducers, enhancer);
 
-function configureStore(preloadedState) {
-
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const store = createStore(reducers,  preloadedState, composeEnhancers(
-    applyMiddleware(...middlewares)
-  ));
-
-  sagaMiddleware.run(rootSaga);
-
-  if (module.hot) {
-    module.hot.accept("./reducers/rootReducer", () => {
-      const nextRootReducer = require("./reducers/rootReducer");
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return store;
-}
-
-const store = configureStore();
+saga.run(rootSaga);
 
 export default store;
 

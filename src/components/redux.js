@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
 import { getData } from "../redux/actions/dataAction";
 import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-const Redux = (props) => {
+const Redux = () => {
 
-    const {
-        dataState: {
-            data,
-            loading,
-        }
-    } = props;
+    const dispatch = useDispatch();
+
+    // const {
+    //     dataState: {
+    //         data,
+    //         loading,
+    //     }
+    // } = props;
 
     useEffect(() => {
-        getData()
+        dispatch(getData())
     }, [])
 
     return (

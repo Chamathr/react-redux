@@ -4,7 +4,7 @@ import {
   getDataActions,
 } from "../types/dataType";
 import {
-  getData,
+  setData,
   getDataError
 } from "../actions/dataAction";
 import {
@@ -12,10 +12,10 @@ import {
 } from "../services/dataService";
 
 export function* getDataList() {
-  yield takeEvery(getDataActions.GET_DATA, function* (payload) {
+  yield takeEvery(getDataActions.GET_DATA, function* () {
     try {
-      const data = yield call(getDataApi, payload.page, payload.filters);
-      yield put(getData(data.data.data));
+      const data = yield call(getDataApi);
+      yield put(setData(data.data));
     } catch (error) {
       yield put(getDataError(error.message));
     }

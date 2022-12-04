@@ -1,7 +1,7 @@
 import { getDataActions } from "../types/dataType";
 
 const initialState = {
-    data: null,
+    data: [],
     dataLoading: 'idle',
     dataError: null
 };
