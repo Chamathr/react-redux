@@ -16,7 +16,7 @@ export const setData = (payload) => {
 
 export const getDataError = (payload) => {
   return {
-    type: getDataActions.GET_DATA_ERROR,
+    type: getDataActions.SET_DATA_ERROR,
     payload,
   };
 };

@@ -14,12 +14,12 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 data: action.payload,
             };
-        case getDataActions.GET_DATA_LOADING:
+        case getDataActions.SET_DATA_LOADING:
             return {
                 ...state,
                 dataLoading: action.payload,
             };
-        case getDataActions.GET_DATA_ERROR:
+        case getDataActions.SET_DATA_ERROR:
             return {
                 ...state,
                 dataError: action.payload,
