@@ -9,7 +9,7 @@ const initialState = {
 export const dataReducer = (state = initialState, action) => {
     
     switch (action.type) {
-        case getDataActions.GET_DATA:
+        case getDataActions.SET_DATA:
             return {
                 ...state,
                 data: action.payload,
