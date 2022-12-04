@@ -12,9 +12,6 @@ const Redux = (props) => {
         }
     } = props;
 
-    //   const data = useSelector((state) => state.data);
-    const dispatch = useDispatch();
-
     useEffect(() => {
         getData()
     }, [])
