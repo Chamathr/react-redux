@@ -23,5 +23,7 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 dataError: action.payload,
             };
+        default:
+            return state;
     }
 }
