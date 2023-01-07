@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
-import { getData } from "../redux/actions/dataAction";
-import { connect } from "react-redux";
+import { fetchData } from "../redux/slices/dataSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { selectDataList } from "../redux/selectors/dataSelector";
 
 const Redux = () => {
 
     const dispatch = useDispatch();
-
-    // const {
-    //     dataState: {
-    //         data,
-    //         loading,
-    //     }
-    // } = props;
+    const dataList = useSelector(selectDataList)
 
     useEffect(() => {
-        dispatch(getData())
+        dispatch(fetchData())
     }, [])
+
+    console.log(dataList)
 
     return (
         <>
@@ -24,10 +20,4 @@ const Redux = () => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    dataState: state.data
-});
-
-export default connect(mapStateToProps, {
-    getData
-})(Redux);
+export default Redux
